@@ -31,7 +31,7 @@ local mostraSeuID = true
 -- variavels de Função
 -----------------------------------------------------------------------------------------------------------------------------------------
 local players = {}
-local admins = {}
+local admim= {}
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- Esse loop cria um array (table) com as informações de ids - Se fizer direto no loop do DRAWTEXT ele tem um delay ao mostrar o id (fica piscando)
@@ -43,7 +43,7 @@ Citizen.CreateThread(
 		    for _, id in ipairs(GetActivePlayers()) do
 				local pid = SVIDclient.getId(GetPlayerServerId(id))
 				players[id] = pid
-				admins[id] = SVIDclient.getPermissao() 
+				admim = SVIDclient.getPermissao() 
 			end
 		end
 	end
@@ -60,7 +60,7 @@ Citizen.CreateThread(
 			        x1, y1, z1 = table.unpack( GetEntityCoords( PlayerPedId(), true ) )
 			        x2, y2, z2 = table.unpack( GetEntityCoords( GetPlayerPed( id ), true ) )
 			        distance = math.floor(GetDistanceBetweenCoords(x1,  y1,  z1,  x2,  y2,  z2,  true))
-			    	if admins[PlayerId()] and (PlayerPedId() ~= GetPlayerPed( id ) or mostraSeuID)then
+			    	if admim and (PlayerPedId() ~= GetPlayerPed( id ) or mostraSeuID)then
 				    	if ((distance < distancia)) then
 				    		DrawText3D(x2, y2, z2+1, players[id], 255, 255, 255)
 				    	end
