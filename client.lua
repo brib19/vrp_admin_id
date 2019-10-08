@@ -37,16 +37,21 @@ local admim= {}
 -- Esse loop cria um array (table) com as informações de ids - Se fizer direto no loop do DRAWTEXT ele tem um delay ao mostrar o id (fica piscando)
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(
-	function()
-		while true do
-			Citizen.Wait(1000)
-		    for _, id in ipairs(GetActivePlayers()) do
-				local pid = SVIDclient.getId(GetPlayerServerId(id))
-				players[id] = pid
-				admim = SVIDclient.getPermissao() 
-			end
-		end
-	end
+    function()
+        while true do
+            Citizen.Wait(1000)
+
+            for id = 0, 255 do 
+                if NetworkIsPlayerActive(id) then
+                    if GetPlayerPed(id) ~= PlayerId() then           
+                        local pid = SVIDclient.getId(GetPlayerServerId(id))
+                        players[id] = pid
+                        admim = SVIDclient.getPermissao()
+                    end
+                end
+            end
+        end
+    end
 )
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- Esse Loop Print os ID's na Cabeça
